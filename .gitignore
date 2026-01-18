@@ -9,8 +9,10 @@ __pycache__/
 # Distribution / packaging
 .Python
 build/
+!docs/build/
 develop-eggs/
 dist/
+docs/dist/
 downloads/
 eggs/
 .eggs/
@@ -79,3 +81,8 @@ dmypy.json
 # OS
 .DS_Store
 Thumbs.db
+
+# Node.js (docs)
+node_modules/
+docs/node_modules/
+pnpm-lock.yaml
