@@ -1,0 +1,10 @@
+title: HATUI
+tagline: Home Assistant Terminal User Interface
+description: A terminal-based dashboard for Home Assistant built with Textual
+version: 0.1.0
+github: https://github.com/tonynv/hatui
+url: https://hatui.tonynv.dev
+
+author:
+  name: tonynv
+  github: https://github.com/tonynv

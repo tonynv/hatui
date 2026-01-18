@@ -1,0 +1,80 @@
+{% extends "base.njk" %}
+
+{% block title %}{{ page.title }} - {{ config.title }}{% endblock %}
+
+{% block content %}
+<article class="py-12 px-4">
+  <div class="max-w-4xl mx-auto">
+    <!-- Breadcrumb -->
+    <nav class="text-sm text-gray-500 mb-8">
+      <a href="/" class="hover:text-white transition-colors">Home</a>
+      <span class="mx-2">/</span>
+      <span class="text-gray-300">{{ page.title }}</span>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="mb-12">
+      <h1 class="text-4xl font-bold mb-4">{{ page.title }}</h1>
+      {% if page.description %}
+      <p class="text-xl text-gray-400">{{ page.description }}</p>
+      {% endif %}
+    </header>
+
+    <!-- Content -->
+    <div class="prose prose-invert prose-cyan max-w-none
+                prose-headings:font-semibold
+                prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4
+                prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
+                prose-p:text-gray-300 prose-p:leading-relaxed
+                prose-a:text-cyan-400 prose-a:no-underline hover:prose-a:underline
+                prose-code:text-cyan-300 prose-code:bg-gray-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
+                prose-pre:bg-gray-900 prose-pre:border prose-pre:border-gray-800
+                prose-strong:text-white
+                prose-ul:text-gray-300 prose-ol:text-gray-300
+                prose-li:marker:text-gray-600
+                prose-table:border-collapse
+                prose-th:bg-gray-800 prose-th:px-4 prose-th:py-2 prose-th:border prose-th:border-gray-700
+                prose-td:px-4 prose-td:py-2 prose-td:border prose-td:border-gray-800">
+      {{ page.content | safe }}
+    </div>
+
+    <!-- Page Navigation -->
+    <nav class="flex justify-between mt-16 pt-8 border-t border-gray-800">
+      {% set prev_page = null %}
+      {% set next_page = null %}
+      {% for p in pages %}
+        {% if p.slug == page.slug %}
+          {% if loop.index0 > 0 %}
+            {% set prev_page = pages[loop.index0 - 1] %}
+          {% endif %}
+          {% if loop.index < pages.length %}
+            {% set next_page = pages[loop.index] %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+
+      <div>
+        {% if prev_page %}
+        <a href="/{{ prev_page.slug }}/" class="group flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
+          <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+          <span>{{ prev_page.title }}</span>
+        </a>
+        {% endif %}
+      </div>
+
+      <div>
+        {% if next_page %}
+        <a href="/{{ next_page.slug }}/" class="group flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
+          <span>{{ next_page.title }}</span>
+          <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </a>
+        {% endif %}
+      </div>
+    </nav>
+  </div>
+</article>
+{% endblock %}

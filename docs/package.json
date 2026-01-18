@@ -1,0 +1,25 @@
+{
+  "name": "hatui-docs",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "HATUI Documentation - Home Assistant Terminal User Interface",
+  "author": "tonynv",
+  "scripts": {
+    "dev": "node build/dev-server.js",
+    "build": "node build/render.js && vite build",
+    "preview": "vite preview",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "nunjucks": "^3.2.4",
+    "marked": "^15.0.0",
+    "js-yaml": "^4.1.0",
+    "gray-matter": "^4.0.3",
+    "glob": "^11.0.0",
+    "chokidar": "^4.0.0"
+  },
+  "devDependencies": {
+    "vite": "^6.0.0",
+    "tailwindcss": "^4.0.0"
+  }
+}
