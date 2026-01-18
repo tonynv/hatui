@@ -142,19 +142,19 @@ class HATUIApp(App):
     def compose(self) -> ComposeResult:
         """Compose the UI."""
         yield Header()
-        yield Container(
-            LoadingIndicator(id="loading"),
-            TabbedContent(
-                TabPane("Lights", EntityTable(domain_filter="light", id="lights-table"), id="lights"),
-                TabPane("Switches", EntityTable(domain_filter="switch", id="switches-table"), id="switches"),
-                TabPane("Sensors", EntityTable(domain_filter="sensor", id="sensors-table"), id="sensors"),
-                TabPane("Climate", EntityTable(domain_filter="climate", id="climate-table"), id="climate"),
-                TabPane("All", EntityTable(id="all-table"), id="all"),
-                id="tabs",
-                classes="hidden",
-            ),
-            id="main-container",
-        )
+        with Container(id="main-container"):
+            yield LoadingIndicator(id="loading")
+            with TabbedContent(id="tabs", classes="hidden"):
+                with TabPane("Lights", id="lights"):
+                    yield EntityTable(domain_filter="light", id="lights-table")
+                with TabPane("Switches", id="switches"):
+                    yield EntityTable(domain_filter="switch", id="switches-table")
+                with TabPane("Sensors", id="sensors"):
+                    yield EntityTable(domain_filter="sensor", id="sensors-table")
+                with TabPane("Climate", id="climate"):
+                    yield EntityTable(domain_filter="climate", id="climate-table")
+                with TabPane("All", id="all"):
+                    yield EntityTable(id="all-table")
         yield StatusBar(id="status-bar")
         yield Footer()
 
