@@ -168,7 +168,7 @@ class HATUIApp(App):
             return
 
         self.client = HomeAssistantClient(self.ha_server, self.ha_token)
-        await self.connect_and_load()
+        self.connect_and_load()
         self.start_auto_refresh()
 
     @work(exclusive=True)
@@ -293,7 +293,10 @@ class HATUIApp(App):
                 self.notify(f"Toggled {entity.friendly_name}")
                 # Refresh after toggle
                 await asyncio.sleep(0.5)
-            await self.refresh_entities()
+                # Fetch updated states
+                entities = await client.get_states()
+                self.entities = {e.entity_id: e for e in entities}
+                self.update_all_tables()
         except Exception as e:
             self.notify(f"Toggle failed: {e}", severity="error")
 
